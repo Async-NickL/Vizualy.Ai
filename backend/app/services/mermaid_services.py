@@ -1,4 +1,4 @@
-from typing import List, Optional, Literal, Union
+from typing import List, Optional, Literal, Union, Dict, Any
 from pydantic import BaseModel, Field
 from langchain.schema import HumanMessage, AIMessage, SystemMessage
 from .llm import gemini_model
@@ -24,6 +24,11 @@ class ChatbotResponse(BaseModel):
     blocks: List[ResponseBlock] = Field(description="List of explanation and diagram blocks", min_items=1, max_items=100)
     summary: str = Field(description="Brief summary of the response", min_length=1, max_length=200)
 
+# Custom message model for history storage
+class HistoryMessage(BaseModel):
+    role: str
+    content: Union[str, Dict[str, Any]]
+
 class MermaidChatbot:
     """Simple AI chatbot that explains concepts with text and mermaid diagrams."""
     
@@ -37,7 +42,7 @@ class MermaidChatbot:
         
         Args:
             query: User's question
-            history: Chat history in format [{"role": "user/agent", "content": "..."}]
+            history: Chat history in format [{"role": "user/agent", "content": ...}]
         
         Returns:
             ChatbotResponse with alternating explanation and diagram blocks
@@ -50,7 +55,10 @@ class MermaidChatbot:
                     if entry["role"] == "user":
                         messages.append(HumanMessage(content=entry["content"]))
                     elif entry["role"] == "agent":
-                        messages.append(AIMessage(content=entry["content"]))
+                        content = entry["content"]
+                        if isinstance(content, dict):
+                            content = str(content)
+                        messages.append(AIMessage(content=content))
             messages.append(HumanMessage(content=f"{query}"))
             response = self.structured_model.invoke(messages)
             return response

@@ -1,8 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import { Toaster } from "sonner";
 
 export const metadata = {
   title: "Vizualy",
@@ -28,6 +27,20 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
             {children}
+            <Toaster
+              position="top-right"
+              richColors
+              theme="system"
+              toastOptions={{
+                style: {
+                  background: "var(--card)",
+                  color: "var(--foreground)",
+                  border: "1px solid var(--border)",
+                },
+                className:
+                  "dark:bg-card dark:text-foreground dark:border-border",
+              }}
+            />
           </ThemeProvider>
         </body>
       </html>

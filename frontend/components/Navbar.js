@@ -9,9 +9,6 @@ import ThemeSwitcher from "./ui/theme-switcher";
 
 
 const Navbar = () => {
-
-  
-  
   return (
     <div>
       <header className="fixed bg-black/5 backdrop-blur-md border-b-1 border-foreground/10 w-full flex justify-between items-center max-sm:p-2 p-4 gap-4 h-14 z-[50]">

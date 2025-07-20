@@ -55,11 +55,11 @@ export const DesktopSidebar = ({ className, children, ...props }) => {
     <>
       <motion.div
         className={cn(
-          "h-full px-4 py-4 hidden md:flex md:flex-col bg-[var(--sidebar)] w-[300px] shrink-0",
+          "h-full px-4 py-4 hidden md:flex md:flex-col bg-[var(--sidebar)] w-[300px] shrink-0 border-r-1 border-foreground/15",
           className
         )}
         animate={{
-          width: animate ? (open ? "300px" : "60px") : "300px",
+          width: animate ? (open ? "300px" : "65px") : "300px",
         }}
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
@@ -77,11 +77,11 @@ export const MobileSidebar = ({ className, children, ...props }) => {
     <>
       <div
         className={cn(
-          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-[var(--sidebar)] w-full"
+          "h-10 px-4 py-4 flex flex-row md:hidden items-center bg-background justify-between absolute right-0"
         )}
         {...props}
       >
-        <div className="flex justify-end mt-3 z-20 w-full">
+        <div className="flex justify-end mt-3 z-20 w-full ">
           <IconMenu2
             className="text-[var(--sidebar-foreground)]"
             onClick={() => setOpen(!open)}

@@ -96,10 +96,10 @@
   height: 2.3rem;
 }
 :root {
-  --background: #f7f7f5;
+  --background: #f4f4f4;
   --foreground: #09090b;
   --foreground-rgb: 9, 9, 11;
-  --card: #d6e4e4;
+  --card: #ffffff;
   --card-foreground: #09090b;
   --popover: #f3f2ef;
   --popover-foreground: #09090b;
@@ -271,4 +271,28 @@ body {
   letter-spacing: var(--tracking-normal);
   background-color: var(--background);
   color: var(--foreground);
+}
+
+/* Hide Mermaid error messages completely */
+.mermaid .errorText,
+.mermaid .errorIcon,
+.mermaid .errorMessage,
+.mermaid [class*="error"],
+.mermaid .error,
+.mermaid svg .errorIcon,
+.mermaid svg .errorText {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

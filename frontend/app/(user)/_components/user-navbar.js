@@ -5,10 +5,12 @@ import { useTheme } from "next-themes";
 import { dark } from "@clerk/themes";
 import { useUser } from "@clerk/nextjs";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useClerk } from "@clerk/nextjs";
 
 const UserNavbar = () => {
   const { resolvedTheme } = useTheme();
   const { isLoaded } = useUser();
+  const { signOut } = useClerk();
 
   if (!isLoaded) {
     return (
@@ -25,6 +27,7 @@ const UserNavbar = () => {
         appearance={{
           baseTheme: resolvedTheme === "dark" ? dark : undefined,
         }}
+        onSignOut={() => signOut({ redirectUrl: "/" })}
       />
       <ThemeSwitcher />
     </div>
